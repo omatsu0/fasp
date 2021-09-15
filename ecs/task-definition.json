@@ -26,7 +26,7 @@
       "environment": [
         {
           "name": "DATABASE_HOST",
-          "value": " ${{ secrets.DB_ENDPOINT }}"
+          "value": "fasp-db.cdiec2y0tm7t.ap-northeast-1.rds.amazonaws.com"
         },
         {
           "name": "DATABASE_NAME",
@@ -46,7 +46,7 @@
         },
         {
           "name": "RAILS_MASTER_KEY",
-          "value": " ${{ secrets.RAILS_MASTER_KEY }}"
+          "value": "72a9240d38ff1b2c5323efc0e1da7621"
         },
         {
           "name": "TZ",
