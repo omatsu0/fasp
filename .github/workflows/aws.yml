@@ -31,16 +31,10 @@ jobs:
         DOCKER_BUILDKIT: 1
         ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         ECR_REPOSITORY: fasp-app
-        IMAGE_TAG: ${{ github.sha }}
+        IMAGE_TAG: latest
       run: |
-        docker build \
-          -f ecs/Dockerfile . \
-          --cache-from=$ECR_REGISTRY/$ECR_REPOSITORY:latest \
-          --build-arg BUILDKIT_INLINE_CACHE=1 \
-          -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG \
-          -t $ECR_REGISTRY/$ECR_REPOSITORY:latest .
+        docker build -f ecs/Dockerfile . -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
         docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-        docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
         echo "::set-output name=image::$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG"
 
     - name: Fill in the new image ID in the Amazon ECS task definition
